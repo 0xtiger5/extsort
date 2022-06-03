@@ -3,5 +3,6 @@
 *int
 sort*
 test*
-!*.cpp
 .vscode/
+temp*
+result.txt

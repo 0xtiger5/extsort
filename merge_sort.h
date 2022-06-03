@@ -176,7 +176,7 @@ void thread_run(std::ifstream& in, std::mutex& inMutex, unsigned order, const un
         else {
             inMutex.unlock();
             // 读不到数了，清空缓冲区
-            if (!buf.empty()) {
+            if (count != 0) {
                 printf("Sorting the %d block.\n", order);
                 std::sort(buf.begin(), buf.begin() + count);
                 std::string filename(std::string("temp") + std::string(std::to_string(order)));
@@ -213,8 +213,7 @@ void thread_run(std::ifstream& in, std::mutex& inMutex, unsigned order, const un
             tempfiles.push_back(filename);
             outMutex.unlock();
             printf("Compelete the %d block.\n", order);
-            buf.clear();
-            order += 6;
+            order += N;
             count = 0;
             inMutex.lock();
         }
